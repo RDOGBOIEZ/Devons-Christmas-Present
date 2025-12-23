@@ -1,0 +1,305 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* BODY */
+body {
+  background: linear-gradient(135deg, #0f2f2a, #1b1f3b);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+}
+
+header p {
+  max-width: 600px;
+  opacity: 0.85;
+}
+
+/* SECTIONS */
+section {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f0c987;
+}
+
+/* 🧩 PUZZLE */
+.puzzle {
+  width: 300px;
+  height: 300px;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 6px;
+}
+
+/* PUZZLE PIECES */
+.piece {
+  background-size: 300px 300px;
+  cursor: pointer;
+  border-radius: 0; /* 🚫 NO rounding */
+}
+
+/* SOLVED STATE */
+.puzzle.solved {
+  gap: 0;
+  pointer-events: none;
+}
+
+/* REVEALED IMAGE */
+.photo {
+  position: relative;
+
+  /* horizontal gallery behavior */
+  flex: 0 0 auto;
+
+  /* NO fixed size */
+  width: auto;
+  height: auto;
+  max-width: 80vw;          /* prevents huge images */
+  max-height: 70vh;
+
+  margin: 5rem auto;
+  border-radius: 18px;
+  overflow: hidden;
+
+  /* smooth reveal */
+  opacity: 0;
+  transform: scale(0.96);
+  animation: photoReveal 1s ease forwards;
+}
+.photo img {
+  display: block;
+  width: 300px;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;   /* 👈 preserves original framing */
+}
+@keyframes photoReveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+
+/* CAPTION */
+.caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.25),
+    transparent
+  );
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.horizontal-gallery {
+  display: flex;
+  gap: 4rem;
+  overflow-x: auto;
+  padding: 3rem 4rem;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+
+.horizontal-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-gallery::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.photo,
+.puzzle {
+  flex:0 0 auto;
+  scroll-snap-align: center;
+}
+
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 3rem;
+  opacity: 0.8;
+}
+
+/* ✨ ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.snowman {
+  width: 140px;
+  height: 260px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+}
+
+.snowman .body,
+.snowman .head {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at top left, #fff, #eee);
+  border-radius: 50%;
+}
+
+.snowman .body {
+  width: 120px;
+  height: 120px;
+  bottom: 0;
+}
+
+.snowman .head {
+  width: 90px;
+  height: 90px;
+  bottom: 110px;
+}
+
+.snowman .eye {
+  position: absolute;
+  top: 90px;
+  width: 8px;
+  height: 8px;
+  background: #222;
+  border-radius: 50%;
+}
+
+.snowman .eye.left { left: 40px; }
+.snowman .eye.right { right: 40px; }
+
+.snowman .nose {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-8deg);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 16px solid orange;
+}
+
+/* Snowwoman extras */
+.snowman .lashes {
+  position: absolute;
+  top: 0px;
+  right: 28px;
+  width: 12px;
+  height: 4px;
+  border-top: 2px solid #222;
+  border-radius: 50%;
+}
+
+.snowman .scarf {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 16px;
+  background: #f0c987;
+  border-radius: 10px;
+}
+.snowman .scarf::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: #f0c987;
+  border-radius: 50%;
+}
+.snowman .scarf::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: #f0c987;
+  border-radius: 50%;
+}
+.solve-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.solve-btn:hover {
+  transform: scale(1.05);
+}
+
+.puzzle.solved .solve-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Gentle idle movement */
+@keyframes snowmanIdle {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.02) translateY(-4px);
+  }
+}
